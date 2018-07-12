@@ -15,8 +15,12 @@
 </head>
 <body>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/excanvas/r3/excanvas.js" type="text/javascript"></script>
-    <script src="//cdn.jsdelivr.net/chart.js/0.2/Chart.js" type="text/javascript"></script>
+  <%--  <script src="//cdn.jsdelivr.net/excanvas/r3/excanvas.js" type="text/javascript"></script>
+    <script src="//cdn.jsdelivr.net/chart.js/0.2/Chart.js" type="text/javascript"></script>--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" type="text/javascript"></script>
     <form id="form1" runat="server">
 
         <script type="text/javascript">
@@ -44,37 +48,61 @@
                         var data = eval(r.d);
                         var aLabels = [];
                         var aValues = [];
+                        var aColor = [];
                         var aDatasets1 = eval(r.d);
 
                         for (var i = 0; i < data.length; i++) {                           
                             aLabels.push(data[i].text);
                             aValues.push(data[i].value);
+                            aColor.push(data[i].color);
                         };
 
                         //alert(aLabels);
                         //alert(aValues);
+                        var barOptions = {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            scales: {
+                                yAxes: [{
 
+                                    gridLines: {
+                                        display: true
+                                    },
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Millions'
+                                    }
+                                }],
+                                xAxes: [{
+                                    gridLines: {
+                                        display: true
+                                    }
+                                }]
+                            }
+                        };
                         var data1 = {
                             labels: aLabels,
                             datasets: [{
-                                label: "Test Data",
+                                label: aLabels,
                                 data: aValues,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
+                                backgroundColor: aColor,
+                                //backgroundColor: [
+                                //    'rgba(255, 99, 132, 0.2)',
+                                //    'rgba(54, 162, 235, 0.2)',
+                                //    'rgba(255, 206, 86, 0.2)',
+                                //    'rgba(75, 192, 192, 0.2)',
+                                //    'rgba(153, 102, 255, 0.2)',
+                                //    'rgba(255, 159, 64, 0.2)'
+                                //],
+                                borderColor: aColor,
+                                //borderColor: [
+                                //    'rgba(255,99,132,1)',
+                                //    'rgba(54, 162, 235, 1)',
+                                //    'rgba(255, 206, 86, 1)',
+                                //    'rgba(75, 192, 192, 1)',
+                                //    'rgba(153, 102, 255, 1)',
+                                //    'rgba(255, 159, 64, 1)'
+                                //],
                                 borderWidth: 1
                             }]
 
@@ -95,13 +123,16 @@
 
                         switch (chartType) {
                             case 1:
-                                userStrengthsChart = new Chart(ctx).Pie(data);
+                                //userStrengthsChart = new Chart(ctx).Pie(data);
+                                userStrengthsChart = new Chart(ctx, { type: 'pie', data: data1, options: barOptions })
                                 break;
                             case 2:
-                                userStrengthsChart = new Chart(ctx).Doughnut(data);
+                                //userStrengthsChart = new Chart(ctx).Doughnut(data);
+                                userStrengthsChart = new Chart(ctx, { type: 'doughnut', data: data1, options: barOptions })
                                 break;
                             case 3:
-                                userStrengthsChart = new Chart(ctx).Bar(data1);
+                                //  userStrengthsChart = new Chart(ctx).Bar(data1);
+                                userStrengthsChart = new Chart(ctx, { type: 'line', data: data1, options: barOptions })
                                 break;
                         }
 
@@ -136,8 +167,7 @@
             </tr>
             <tr>
                 <td>
-                    <div id="dvChart">
-                    </div>
+                    
                 </td>
                 <td>
                     <div id="dvLegend">
@@ -145,6 +175,8 @@
                 </td>
             </tr>
         </table>
+        <div id="dvChart">
+                    </div>
     </form>
 </body>
 </html>
