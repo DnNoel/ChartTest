@@ -169,11 +169,15 @@
                     <asp:ListItem Text="Bar" Value="1" Selected="True" />
                     <asp:ListItem Text="List" />
                 </asp:RadioButtonList>
+                <div runat="server" id="btn_show_hide">
+                    <asp:Button ID="btnExport" runat="server" Text="Export_PDF" OnClick="butExportPDF_Click" />
+                    <asp:Button ID="Btn_SendMail" runat="server" onclick="Btn_SendMail_Click" Text="Send Email" />
+                </div>
                 </td>
             </tr>            
         </table>
         <div id="dvChart"></div>
-        <div>
+        <div runat="server" id="theDiv">                   
                 <span>Report Lists</span>
                 <asp:ListView ID="lvReport" runat="server"  ItemPlaceholderID="itemPlaceHolder1"  >
                 <LayoutTemplate>  
