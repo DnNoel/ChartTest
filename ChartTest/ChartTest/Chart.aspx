@@ -15,7 +15,7 @@
 </head>
 <body>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <%--  <script src="//cdn.jsdelivr.net/excanvas/r3/excanvas.js" type="text/javascript"></script>
+    <%--  <script src="//cdn.jsdelivr.net/excanvas/r3/excanvas.js" type="text/javascript"></script>
     <script src="//cdn.jsdelivr.net/chart.js/0.2/Chart.js" type="text/javascript"></script>--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" type="text/javascript"></script>
@@ -51,13 +51,13 @@
                         var aColor = [];
                         var aDatasets1 = eval(r.d);
 
-                        for (var i = 0; i < data.length; i++) {                           
+                        for (var i = 0; i < data.length; i++) {
                             aLabels.push(data[i].text);
                             aValues.push(data[i].value);
                             aColor.push(data[i].color);
                         };
 
-                        //alert(aLabels);
+                       // alert(aLabels);
                         //alert(aValues);
                         var barOptions = {
                             responsive: true,
@@ -83,7 +83,7 @@
                         var data1 = {
                             labels: aLabels,
                             datasets: [{
-                                label: aLabels,
+                               // label: '# of Votes',
                                 data: aValues,
                                 backgroundColor: aColor,
                                 //backgroundColor: [
@@ -101,13 +101,20 @@
                                 //    'rgba(255, 206, 86, 1)',
                                 //    'rgba(75, 192, 192, 1)',
                                 //    'rgba(153, 102, 255, 1)',
-                                //    'rgba(255, 159, 64, 1)'
+                                //    'rgba(255, 159, 64, 1)',
+                                //    'rgba(255, 99, 132, 0.2)',
+                                //    'rgba(54, 162, 235, 0.2)',
+                                //    'rgba(255, 206, 86, 0.2)',
+                                //    'rgba(75, 192, 192, 0.2)',
+                                //    'rgba(153, 102, 255, 0.2)',
+                                //    'rgba(255, 159, 64, 0.2)'
                                 //],
                                 borderWidth: 1
                             }]
 
                         };
 
+                     
                         var el = document.createElement('canvas');
                         $("#dvChart")[0].appendChild(el);
 
@@ -124,15 +131,15 @@
                         switch (chartType) {
                             case 1:
                                 //userStrengthsChart = new Chart(ctx).Pie(data);
-                                userStrengthsChart = new Chart(ctx, { type: 'pie', data: data1, options: barOptions })
+                                userStrengthsChart = new Chart(ctx, { type: 'pie', data: data1 })
                                 break;
                             case 2:
                                 //userStrengthsChart = new Chart(ctx).Doughnut(data);
-                                userStrengthsChart = new Chart(ctx, { type: 'doughnut', data: data1, options: barOptions })
+                                userStrengthsChart = new Chart(ctx, { type: 'doughnut', data: data1})
                                 break;
                             case 3:
                                 //  userStrengthsChart = new Chart(ctx).Bar(data1);
-                                userStrengthsChart = new Chart(ctx, { type: 'line', data: data1, options: barOptions })
+                                userStrengthsChart = new Chart(ctx, { type: 'bar', data: data1, options: barOptions })
                                 break;
                         }
 
@@ -165,18 +172,16 @@
                     </asp:RadioButtonList>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    
-                </td>
+           <%-- <tr>
+                <td></td>
                 <td>
                     <div id="dvLegend">
                     </div>
                 </td>
-            </tr>
+            </tr>--%>
         </table>
         <div id="dvChart">
-                    </div>
+        </div>
     </form>
 </body>
 </html>
