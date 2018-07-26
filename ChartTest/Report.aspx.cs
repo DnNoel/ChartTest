@@ -216,7 +216,7 @@ namespace ChartTest
 
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("noelsa46@gmail.com", "noelsa462018");
+            client.Credentials = new NetworkCredential("noelsa46@gmail.com", "password");
             client.Host = "smtp.gmail.com";
             //client.Host = "smtp.office365.com";
             client.Port = 587;
